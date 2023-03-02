@@ -27,11 +27,31 @@ function mergeSort(compare, elements) {
   return elements;
 }
 
-  // merge
-function merge(compare, left, right){
+// merge
+function merge(compare, left, right) {
   // how to compare each single element in their own separate array
+  const sorted = [];
 
-  
+  //set both of these to zero, the array lenghts are 1, so array[0]
+  let leftIndex = 0;
+  let rightIndex = 0;
+  while (leftIndex < left.length && rightIndex < right.length) {
+    // will subtract one array value from, the other array value
+    // returning a number
+    const comparison = compare(left[leftIndex], right[rightIndex]);
+
+    if (comparison <= 0) {
+      sorted.push(left[leftIndex]);
+      leftIndex++;
+    } else {
+      sorted.push(right[rightIndex]);
+      rightIndex++;
+    }
+  }
+
+  return sorted.concat(
+    leftIndex < left.length ? left.slice(leftIndex) : right.slice(rightIndex)
+  );
 }
 
 module.exports = mergeSort;
